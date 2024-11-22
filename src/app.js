@@ -1,0 +1,26 @@
+import express from 'express'
+import dotenv from 'dotenv'
+import routes from './routes/index.js'
+import errorHandler from './middlewares/errorHandler.js'
+import rateLimitMiddleware from './middlewares/rateLimit.js'
+import cors from 'cors'
+
+dotenv.config()
+
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+}
+
+const app = express()
+app.use(express.json())
+app.use(rateLimitMiddleware)
+app.use(cors(corsOptions))
+app.use('/api/v1', routes)
+app.use(errorHandler)
+
+const PORT = process.env.PORT || 3020
+
+app.listen(PORT,()=>{
+  console.log(`servidor Trabajando 🌑🌕 : ${PORT}`)
+})
