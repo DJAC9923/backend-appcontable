@@ -7,6 +7,7 @@ class FacturaRepository {
     const factura = await db.collection('facturas').add({
       usuarioId: data.usuarioId, // Enlace con el usuario
       clienteId: data.clienteId, // Enlace con el cliente
+      nombreCliente: data.nombreCliente,
       fecha: data.fecha,
       telefono: data.telefono,
       pago: data.pago,
